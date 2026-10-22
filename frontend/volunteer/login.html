@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="festApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fest Volunteer | Login</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+<body>
+  <div class="auth-wrapper" ng-controller="VolLoginCtrl">
+    <!-- TODO: replace background-color below with background-image: url('../assets/concert.jpg') once you add your own photo -->
+    <div class="auth-image" style="background:linear-gradient(160deg,#120a24,#3a1f66);"></div>
+
+    <div class="auth-form-side">
+      <div class="auth-box">
+        <div class="logo-wrap">
+          <!-- TODO: replace with your own logo at ../assets/logo.png -->
+          <div style="font-size:56px;">🎓</div>
+        </div>
+        <h2>Welcome Back !</h2>
+        <p class="subtitle">Login to continue</p>
+
+        <div class="error-msg" ng-if="error">{{error}}</div>
+
+        <form ng-submit="submit()">
+          <div class="form-group">
+            <label>Email / Register Number</label>
+            <input type="text" ng-model="creds.identifier" placeholder="enter your email or register no." />
+          </div>
+          <div class="form-group pw-field">
+            <label>Password</label>
+            <input ng-attr-type="{{showPw ? 'text' : 'password'}}" ng-model="creds.password" placeholder="enter your password" />
+            <button type="button" class="toggle-pw" ng-click="togglePw()">👁</button>
+          </div>
+          <div class="forgot-link"><a href="#">Forgot Password?</a></div>
+          <button type="submit" class="btn-primary">Login</button>
+        </form>
+
+        <div class="switch-link">Don't have an account? <a href="register.html">Register here</a></div>
+        <div class="switch-link" style="margin-top:6px;"><a href="../admin/login.html">Admin Login →</a></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/volunteer-controllers.js"></script>
+</body>
+</html>
