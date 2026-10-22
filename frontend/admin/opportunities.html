@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="festApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fest Volunteers | Oppurtunities</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+<body class="green-page" ng-controller="AdminOpportunitiesCtrl" ng-init="activePage='opportunities'">
+  <div class="app-shell">
+    <div ng-include="'partials/sidebar.html'"></div>
+
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <h1>Oppurtunities</h1>
+          <div class="subtitle">Create and manage volunteering opportunities</div>
+        </div>
+        <button class="btn-new" ng-click="showForm = !showForm">+ Add opportunity</button>
+      </div>
+
+      <div class="content-area">
+        <div class="panel" ng-if="showForm">
+          <form ng-submit="addOpportunity()">
+            <div class="form-group"><label>Title</label><input type="text" ng-model="newOpp.title" required /></div>
+            <div class="form-group"><label>Description</label><input type="text" ng-model="newOpp.description" /></div>
+            <div class="form-group"><label>Category</label><input type="text" ng-model="newOpp.category" /></div>
+            <div class="form-group"><label>Openings</label><input type="number" ng-model="newOpp.openings" min="1" /></div>
+            <div class="form-group"><label>Icon (emoji)</label><input type="text" ng-model="newOpp.icon" placeholder="🎪" /></div>
+            <button type="submit" class="btn-primary green" style="width:auto; padding:10px 22px;">Save Opportunity</button>
+          </form>
+        </div>
+
+        <div class="opportunity-card" ng-repeat="opp in opportunities">
+          <div class="opp-left">
+            <span class="opp-icon">{{opp.icon || '🎪'}}</span>
+            <div>
+              <h4>{{opp.title}}</h4>
+              <div class="opp-desc">{{opp.description}}</div>
+              <div class="opp-openings">{{opp.openings}} Openings</div>
+            </div>
+          </div>
+          <button class="btn-small reject" ng-click="removeOpportunity(opp)">Remove</button>
+        </div>
+
+        <div class="empty-state" ng-if="!opportunities.length">No opportunities yet — add one above.</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/admin-controllers.js"></script>
+</body>
+</html>

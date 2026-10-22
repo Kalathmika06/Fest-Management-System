@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="festApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fest Volunteers | Volunteer Detail</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+<body class="green-page" ng-controller="AdminVolunteerDetailCtrl" ng-init="activePage='volunteers'">
+  <div class="app-shell">
+    <div ng-include="'partials/sidebar.html'"></div>
+
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <h1>All Volunteers</h1>
+          <div class="subtitle">View and manage all volunteers</div>
+        </div>
+        <div class="admin-chip">👤 Admin ▾</div>
+      </div>
+
+      <div class="content-area">
+        <div class="back-link"><a href="#" ng-click="goBack()">← Back</a></div>
+
+        <div class="panel">
+          <div class="profile-block">
+            <!-- TODO: replace with an actual photo -->
+            <div class="avatar-circle"></div>
+            <div class="profile-info">
+              <div>• Register No: {{volunteer.registerNo}}</div>
+              <div>• Department: {{volunteer.department}}</div>
+              <div>• Email: {{volunteer.email}}</div>
+              <div>• Phone: {{volunteer.phone || 'Not set'}}</div>
+            </div>
+          </div>
+
+          <h3>Applications</h3>
+          <div class="list-row" ng-repeat="app in applications">
+            <div style="display:flex; align-items:center;">
+              <span class="row-icon">🎪</span>
+              <div class="row-title">{{app.opportunity.title}}</div>
+            </div>
+            <div class="action-buttons" ng-if="app.status === 'Under Review'">
+              <button class="btn-small select" ng-click="setStatus(app,'Selected')">Select</button>
+              <button class="btn-small reject" ng-click="setStatus(app,'Rejected')">Reject</button>
+            </div>
+            <span class="badge" ng-class="badgeClass(app.status)" ng-if="app.status !== 'Under Review'">{{app.status}}</span>
+          </div>
+
+          <div class="empty-state" ng-if="!applications.length">No applications submitted.</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/admin-controllers.js"></script>
+</body>
+</html>
