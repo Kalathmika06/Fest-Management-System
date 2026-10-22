@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="festApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fest Volunteer | My Applications</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="VolApplicationsCtrl" ng-init="activePage='applications'">
+  <div class="app-shell">
+    <div ng-include="'partials/sidebar.html'"></div>
+
+    <main class="main-content">
+      <div class="content-area">
+        <h1>My Applications</h1>
+        <p class="subtitle" style="margin-bottom:20px;">Track your applied opportunities</p>
+
+        <div class="app-card" ng-repeat="app in applications">
+          <div>
+            <h4>{{app.opportunity.title}}</h4>
+            <div class="opp-desc">applied on {{app.appliedOn | date:'MMM d yyyy'}}</div>
+          </div>
+          <span class="badge" ng-class="badgeClass(app.status)">{{app.status}}</span>
+        </div>
+
+        <div class="empty-state" ng-if="!applications.length">You haven't applied to anything yet.</div>
+
+        <p style="color:#777; font-size:14px; margin-top:14px;">
+          selected roles will be visible in your dashboard once allocated
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/volunteer-controllers.js"></script>
+</body>
+</html>

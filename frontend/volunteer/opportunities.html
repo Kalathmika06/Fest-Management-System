@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="festApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fest Volunteer | Oppurtunities</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="VolOpportunitiesCtrl" ng-init="activePage='opportunities'">
+  <div class="app-shell">
+    <div ng-include="'partials/sidebar.html'"></div>
+
+    <main class="main-content">
+      <div class="content-area">
+        <h1>Browse &amp; Apply</h1>
+        <p class="subtitle" style="margin-bottom:20px;">Find the best roles that suit you</p>
+
+        <div class="search-bar-row">
+          <input type="text" ng-model="search" placeholder="search oppurtunities" />
+          <select ng-model="category">
+            <option>All Categories</option>
+            <option ng-repeat="c in categories">{{c}}</option>
+          </select>
+        </div>
+
+        <div class="opportunity-card"
+             ng-repeat="opp in opportunities | filter:{title:search} | filter:(category!=='All Categories' ? {category:category} : '')">
+          <div class="opp-left">
+            <span class="opp-icon">{{opp.icon || '🎪'}}</span>
+            <div>
+              <h4>{{opp.title}}</h4>
+              <div class="opp-desc">{{opp.description}}</div>
+              <div class="opp-openings">{{opp.openings}} Openings</div>
+            </div>
+          </div>
+          <button class="btn-apply" ng-click="apply(opp)" ng-disabled="hasApplied(opp._id)">
+            {{hasApplied(opp._id) ? 'Applied' : 'Apply'}}
+          </button>
+        </div>
+
+        <div class="empty-state" ng-if="!opportunities.length">No opportunities available right now.</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/volunteer-controllers.js"></script>
+</body>
+</html>

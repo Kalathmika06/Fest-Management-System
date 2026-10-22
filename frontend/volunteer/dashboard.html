@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="festApp">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fest Volunteer | Dashboard</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+</head>
+<body ng-controller="VolDashboardCtrl" ng-init="activePage='dashboard'">
+  <div class="app-shell">
+    <div ng-include="'partials/sidebar.html'"></div>
+
+    <main class="main-content">
+      <div class="content-area">
+        <h1>Welcome, {{user.fullName}} ! 👋</h1>
+        <p class="subtitle" style="margin-bottom:24px;">Ready to make this fest amazing?</p>
+
+        <div class="stat-cards">
+          <div class="stat-card tint-1">
+            <div class="num">{{stats.applicationsSubmitted || 0}}</div>
+            <div class="label">Applications<br />Submitted</div>
+          </div>
+          <div class="stat-card tint-2">
+            <div class="num">{{stats.rolesAllocated || 0}}</div>
+            <div class="label">Roles<br />Allocated</div>
+          </div>
+          <div class="stat-card tint-3">
+            <div class="num">{{stats.hoursContributed || 0}}</div>
+            <div class="label">Hours<br />Contributed</div>
+          </div>
+          <div class="stat-card tint-4">
+            <div class="num">{{stats.badgesEarned || 0}}</div>
+            <div class="label">Badges<br />Earned</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="panel">
+            <h3>Upcoming Activities</h3>
+            <div class="list-row">
+              <div style="display:flex;align-items:center;">
+                <span class="row-icon">🎉</span>
+                <div>
+                  <div class="row-title">Inauguration Ceremony</div>
+                  <div class="row-sub">Event Management Team</div>
+                </div>
+              </div>
+              <div class="row-date">22/07/2026</div>
+            </div>
+            <div class="list-row">
+              <div style="display:flex;align-items:center;">
+                <span class="row-icon">🛠️</span>
+                <div>
+                  <div class="row-title">Tech Symposium</div>
+                  <div class="row-sub">Technical Team</div>
+                </div>
+              </div>
+              <div class="row-date">12/08/2026</div>
+            </div>
+            <div class="list-row">
+              <div style="display:flex;align-items:center;">
+                <span class="row-icon">🩸</span>
+                <div>
+                  <div class="row-title">Blood Donation Camp</div>
+                  <div class="row-sub">Refreshments and hospitality</div>
+                </div>
+              </div>
+              <div class="row-date">15/08/2026</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Announcements</h3>
+            <ul style="padding-left:18px; margin:0;">
+              <li ng-repeat="a in announcements" style="margin-bottom:10px;">{{a.title}}</li>
+              <li ng-if="!announcements.length" style="color:#999;">No announcements yet</li>
+            </ul>
+            <div style="text-align:right; margin-top:10px;">
+              <a href="announcements.html" style="font-weight:600;">View all</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/volunteer-controllers.js"></script>
+</body>
+</html>
